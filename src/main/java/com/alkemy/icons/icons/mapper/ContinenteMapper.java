@@ -4,6 +4,9 @@ import com.alkemy.icons.icons.dto.ContinenteDTO;
 import com.alkemy.icons.icons.entity.ContinenteEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 // Este objeto debo inyectarlo en mi servicio p/ poder utilizarlo
 public class ContinenteMapper {
@@ -24,5 +27,13 @@ public class ContinenteMapper {
         dto.setImagen(entity.getImagen());
         dto.setDenominacion(entity.getDenominacion());
         return dto;
+    }
+
+    public List<ContinenteDTO> continenteEntityList2DTOList(List<ContinenteEntity> entities){
+        List<ContinenteDTO> dtos = new ArrayList<>();
+        for(ContinenteEntity entity : entities){
+            dtos.add(continenteEntity2DTO(entity));
+        }
+        return dtos;
     }
 }

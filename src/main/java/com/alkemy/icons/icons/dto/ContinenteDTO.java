@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 public class ContinenteDTO {
     // Definimos los atributos que necesito llevar y traer los datos del continente
+
     private Long id;
     private String imagen;
     private  String denominacion;

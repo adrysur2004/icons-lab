@@ -2,6 +2,8 @@ package com.alkemy.icons.icons.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import java.util.*;
 @Table(name="icon")
 @Getter
 @Setter
+@SQLDelete(sql = " UPDATE icon SET deleted = true WHERE id=?") // crea campo adicional "deleted" - pone 1 cdo el campo fue borrado
+@Where(clause =  "deleted=false") // con esto verifico si el campo fue borrado o no (marcado)
 public class IconEntity {
 
     @Id
@@ -29,7 +33,7 @@ public class IconEntity {
 
     private String historia;
 
-    //private boolean deleted = Boolean.FALSE; => por ahora no lo neesitamos xq es el DOFTDELETE
+    private boolean deleted = Boolean.FALSE; // para el softdelete
 
     @ManyToMany(mappedBy = "icons", cascade = CascadeType.ALL)
     private List<PaisEntity> paises = new ArrayList<>();
